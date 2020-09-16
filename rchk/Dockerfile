@@ -3,10 +3,12 @@ FROM ubuntu:18.04
 
 
 # Remain current
-RUN sed -i 's/main/main restricted universe/g' /etc/apt/sources.list \
-    && sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list \
-    && test -z "`cat /etc/apt/sources.list | grep '^deb-src'`" && cat /etc/apt/sources.list | sed -e 's/^deb/deb-src/' >> /etc/apt/sources.list \
-    && apt-get update \
+RUN sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
+RUN sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list
+
+# RUN "test -z `cat /etc/apt/sources.list | grep '^deb-src'` && cat /etc/apt/sources.list | sed -e 's/^deb/deb-src/'" >> /etc/apt/sources.list
+
+RUN apt-get update \
     && apt-get -y upgrade
 
 
