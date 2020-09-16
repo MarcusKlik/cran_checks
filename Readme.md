@@ -15,3 +15,7 @@ image for testing R packages using ubsan sanitizers
 # san
 
 image for testing R packages using san sanitizers
+
+# rchk
+
+image for testing R packages using rchk

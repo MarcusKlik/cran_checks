@@ -2,15 +2,15 @@
 FROM ubuntu:18.04
 
 
-# Remain current
+# remain current and add some sources
 RUN sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
 RUN sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list
-
-# RUN "test -z `cat /etc/apt/sources.list | grep '^deb-src'` && cat /etc/apt/sources.list | sed -e 's/^deb/deb-src/'" >> /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get -y upgrade
 
+# avoid interactive time-zone query
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 
 # Install required utilities
 RUN apt-get install -y libopenblas-dev libcurl4-openssl-dev libopenmpi-dev openmpi-bin openmpi-common openmpi-doc software-properties-common \
